@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\FileSelectTool.cs" />
+    <Compile Include="Code\FileTool.cs" />
     <Compile Include="Code\ImageHelper.cs" />
+    <Compile Include="Code\ScriptGenerator.cs" />
     <Compile Include="FileTools\FileTool.cs" />
     <Compile Include="FileTools\FileToolForm.cs">
       <SubType>Form</SubType>
@@ -118,8 +120,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FormsStartConsole\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -74,7 +74,8 @@ namespace DevTool.ImageTools
                 string _name = Path.GetFileNameWithoutExtension(compressImgPaths[i]);
                 Shell.WriteLine(string.Format("path:{0},name:{1}", _path, _name));
                 if (!Directory.Exists(_path + "\\compressImgs")) Directory.CreateDirectory(_path + "\\compressImgs");
-                ImageHelper.CompressImage(compressImgPaths[i], _path + "\\compressImgs\\" + _name + "." + Path.GetExtension(compressImgPaths[i]), 90, 2000);
+                string newPath = _path + "\\compressImgs\\" + _name + "." + Path.GetExtension(compressImgPaths[i]);
+                ImageHelper.CompressImage(compressImgPaths[i],newPath, int.Parse(InputFlag.Text), int.Parse(inputImgSize.Text));
             }
         }
 
