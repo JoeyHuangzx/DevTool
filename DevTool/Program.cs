@@ -10,15 +10,7 @@ namespace DevTool
 {
     public static class Program
     {
-        [DllImport("kernel32.dll",SetLastError =true)]
-        public static extern Boolean AllocConsole();
-        [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern Boolean FreeConsole();
-        [DllImport("kernel32", SetLastError = true)]
-        private static extern bool AttachConsole(int dwProcessId);
-
-        [DllImport("kernel32.dll")]
-        private static extern IntPtr GetConsoleWindow();
+        
 
         /// <summary>
         /// 应用程序的主入口点。
@@ -26,35 +18,25 @@ namespace DevTool
         [STAThread]
         static void Main()
         {
+        
 
-            DebugConsole();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new DevTool());
 
-            
 
         }
 
-        static void DebugConsole()
-        {
-            
-            AllocConsole();
-            Shell.WriteLine("注意：启动程序...");
-            Shell.WriteLine("\tWritten by wuming");
-            Shell.WriteLine("{0}：{1}", "警告", "这是一条警告信息。");
-            Shell.WriteLine("{0}：{1}", "错误", "这是一条错误信息！");
-            Shell.WriteLine("{0}：{1}", "注意", "这是一条需要的注意信息。");
-            Shell.WriteLine("");
-          
-        }
+     
     }
 
     public static class Shell
     {
+        public delegate void LogCallBack(string logStr);
+        public static event LogCallBack logCallBack;
+
         public static void Show()
         {
-            
         }
 
         /// <summary>  
@@ -74,7 +56,8 @@ namespace DevTool
         public static void WriteLine(string output)
         {
             Console.ForegroundColor = GetConsoleColor(output);
-            Console.WriteLine(@"[{0}]{1}", DateTimeOffset.Now, output);
+            Console.WriteLine(@"[{0}]{1}--", DateTimeOffset.Now, output);
+            logCallBack?.Invoke(string.Format("[{0}]--{1}", DateTimeOffset.Now, output));
         }
 
         /// <summary>  

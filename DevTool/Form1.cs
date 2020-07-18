@@ -19,6 +19,8 @@ namespace DevTool
         public DevTool()
         {
             InitializeComponent();
+            LogForm logForm = new LogForm();
+            logForm.Show();
         }
 
         private void DevTool_Load(object sender, EventArgs e)

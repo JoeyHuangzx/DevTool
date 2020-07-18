@@ -34,9 +34,9 @@ namespace DevTool.ScriptsTools
 
         private void generatorBtn_Click(object sender, EventArgs e)
         {
-
+            Shell.WriteLine("创建脚本");
             ScriptGenerator.Create(ClassCombo.SelectedItem.ToString(), inputClassName.Text, "JoeyHuang", inputDesc.Text);
-
+            Shell.WriteLine("完成");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -47,6 +47,7 @@ namespace DevTool.ScriptsTools
         private void enumBtn_Click(object sender, EventArgs e)
         {
             string _path;
+            Shell.WriteLine("创建枚举");
             FileSelectTool.SelectFolders(out _path);
             DirectoryInfo directoryInfo = new DirectoryInfo(_path);
             FileInfo[] fileInfos = directoryInfo.GetFiles();
@@ -59,10 +60,11 @@ namespace DevTool.ScriptsTools
                     string _enum = fileInfos[i].Name.Split('.')[0];
                     fields.Add(_enum);
                     str += _enum + "\r\n";
+                    Shell.WriteLine("name:"+_enum);
                 }
             }
             ScriptGenerator.GeneratorTsEnum(InputEnumName.Text, fields.ToArray(), _path);
-
+            Shell.WriteLine("完成");
         }
     }
 }

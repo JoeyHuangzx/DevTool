@@ -45,6 +45,7 @@ namespace DevTool.ImageTools
             {
                 string _path = Path.GetDirectoryName(paths[i]);
                 string _name = Path.GetFileNameWithoutExtension(paths[i]);
+                Shell.WriteLine(string.Format("图片名：{0}", _name));
                 Image img = Image.FromFile(paths[i]);
                 if (format == ImageFormat.Jpeg)
                 {
@@ -56,6 +57,7 @@ namespace DevTool.ImageTools
                 }
                 img.Dispose();
             }
+            Shell.WriteLine(string.Format("完成"));
         }
 
         private List<string> compressImgPaths = new List<string>();
@@ -82,6 +84,7 @@ namespace DevTool.ImageTools
         private List<string> SelectChangImgPaths = new List<string>();
         private void selectChangeWHbtn_Click(object sender, EventArgs e)
         {
+            SelectChangImgPaths.Clear();
             FileSelectTool.SelectFiles(out SelectChangImgPaths);
         }
 
@@ -92,8 +95,10 @@ namespace DevTool.ImageTools
             if (!Directory.Exists(newpath)) Directory.CreateDirectory(newpath);
             for (int i = 0; i < SelectChangImgPaths.Count; i++)
             {
+                Shell.WriteLine(string.Format("改变的图片：{0}",SelectChangImgPaths[i]));
                 ImageHelper.Image_Resize(SelectChangImgPaths[i], newpath, int.Parse(inputChangeWidth.Text));
             }
+            Shell.WriteLine(string.Format("完成"));
         }
 
 
